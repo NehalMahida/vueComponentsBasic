@@ -1,7 +1,9 @@
 <template>
   <li>
     <div class="left">
-      <img :src="product.imageSrc" alt="" @click="productSelected" />
+      <div class="imgDiv">
+        <img :src="product.imageSrc" alt="" @click="productSelected" />
+      </div>
     </div>
     <div class="right">
       <p class="productName">{{ product.name }}</p>
@@ -53,10 +55,13 @@ export default {
 .left {
   padding: 10px;
 }
-img {
+.imgDiv {
   width: 200px;
-  height: 300px;
-  margin-right: 10px;
+  height: 200px;
+}
+.imgDiv img {
+  max-width: 100%;
+  max-height: 100%;
 }
 li {
   margin: 10px auto;

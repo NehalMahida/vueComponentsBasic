@@ -3,7 +3,9 @@
     <h1 style="text-align: center;">Edit Product</h1>
     <div class="productEdit">
       <div class="left">
-        <img :src="product.imageSrc" alt="" />
+        <div class="imgDiv">
+          <img :src="copyProduct.imageSrc" alt="" />
+        </div>
         <input
           type="file"
           id="inputFile"
@@ -17,7 +19,7 @@
         <form action="" @submit="updateProduct">
           <div class="inputField">
             <label for="productName">Product Name</label> <br />
-            <input type="text" id="productName" v-model="product.name" />
+            <input type="text" id="productName" v-model="copyProduct.name" />
           </div>
           <div class="inputField">
             <label for="productDescription">Product Description</label> <br />
@@ -26,7 +28,7 @@
               id="productDescription"
               cols="50"
               rows="5"
-              v-model="product.description"
+              v-model="copyProduct.description"
             ></textarea>
           </div>
           <div class="inputField">
@@ -34,7 +36,7 @@
             <input
               type="number"
               id="productPrice"
-              v-model="product.price"
+              v-model="copyProduct.price"
               min="0"
             />
           </div>
@@ -61,6 +63,7 @@ export default {
     // click on update button.
     updateProduct(e) {
       alert("Product Details Updated Successfully");
+      this.product = this.copyProduct;
       this.emitter.emit("updateProduct", this.product);
       this.emitter.emit("backToHome", "Products");
       e.preventDefault();
@@ -68,9 +71,6 @@ export default {
     // click on cancel update.
     cancelUpdate() {
       alert("Update Cancel!!");
-      // assign the previous value to product.
-      this.product = this.copyProduct;
-      this.emitter.emit("updateProduct", this.product);
       this.emitter.emit("backToHome", "Products");
     },
     // when click on upload button.
@@ -79,7 +79,7 @@ export default {
       const file = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (event) => {
-        this.product.imageSrc = event.target.result;
+        this.copyProduct.imageSrc = event.target.result;
       };
       reader.readAsDataURL(file);
     },
@@ -121,9 +121,14 @@ export default {
 .inputField label {
   font-weight: bold;
 }
-img {
+.imgDiv {
   width: 300px;
   height: 300px;
+  margin-bottom: 10px;
+}
+.imgDiv img {
+  max-width: 100%;
+  max-height: 100%;
 }
 .productName {
   font-size: 30px;
@@ -136,11 +141,11 @@ img {
   margin: 20px 0;
 }
 .right button {
-  margin-top: 15px;
+  margin-top: 25px;
   margin-right: 10px;
 }
 input[type="submit"] {
-  margin-top: 15px;
+  margin-top: 25px;
   margin-right: 10px;
 }
 </style>

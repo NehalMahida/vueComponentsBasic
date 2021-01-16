@@ -3,7 +3,9 @@
     <h1 style="text-align: center;">Product Details</h1>
     <div class="productDetails">
       <div class="left">
-        <img :src="product.imageSrc" alt="" />
+        <div class="imgDiv">
+          <img :src="product.imageSrc" alt="" />
+        </div>
       </div>
       <div class="right">
         <p class="productName">{{ product.name }}</p>
@@ -68,16 +70,24 @@ export default {
   padding-top: 5px;
 }
 .left {
-  text-align: center;
   padding: 20px;
+}
+.imgDiv {
+  width: 300px;
+  height: 300px;
+  margin-bottom: 10px;
+}
+.imgDiv img {
+  max-width: 100%;
+  max-height: 100%;
 }
 .right {
   padding: 20px;
 }
-img {
-  width: 300px;
-  height: 300px;
-}
+/* img {
+  max-width: 100%;
+  max-height: 100%;
+} */
 .productName {
   font-size: 30px;
   font-weight: bold;
